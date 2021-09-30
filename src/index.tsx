@@ -3,27 +3,12 @@ import ReactDOM from 'react-dom';
 import './scss/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    useQuery,
-    gql
-} from "@apollo/client";
 
-// Setup of Apollo client to work with GraphQL of Github API V4
-// @TODO: add GitHub token to access Github API V4 via GraphQL
-const client = new ApolloClient({
-    uri: 'https://api.github.com/graphql',
-    cache: new InMemoryCache()
-});
-
+// Render the React app with the Apollo client
 ReactDOM.render(
-    <ApolloProvider client={client}>
-      <React.StrictMode>
+    <React.StrictMode>
         <App />
-      </React.StrictMode>
-    </ApolloProvider>,
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

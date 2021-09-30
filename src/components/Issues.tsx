@@ -6,10 +6,15 @@ import {
 
 // @TODO: adjust issues amount and states via input type checkbox or radio selection
 function Issues() {
+    // You can change the repository owner and name here to flexible browse and search another repository on Github!
+    const repositoryOwner: string = "facebook";
+    const repositoryName: string = "react"
+
+    // The base query to fetch the issues from Github via Github V4 GraphQL API from a specific repository and owner.
     const GITHUB_ISSUES = gql`
         query GetGithubIssues {
           repository(owner:"facebook", name:"react") {
-            issues(last:20, states:CLOSED) {
+            issues(last:100, states:OPEN) {
               edges {
                 node {
                   title
@@ -25,15 +30,32 @@ function Issues() {
     const {loading, error, data} = useQuery(GITHUB_ISSUES);
 
     // @TODO: add css spinner for loading state and error icon
-    if (loading) return <p>Daten werden geladen...</p>;
-    if (error) return <p>Ein Fehler ist aufgetreten. Bitte laden Sie die Seite neu.</p>;
+    if (loading) return <p>Loading data...</p>;
+    if (error) return <p>An error occurred. Please reload the page and try again!</p>;
 
-    let map = data.issues.map(({title, url, bodyText}) => (
-        <div key={url}>
-            <p>
-                {title}: {bodyText}
-            </p>
-        </div>
-    ));
-    return map;
+    // The processed query data to be returned from the component.
+    let mapIssues = data.repository.issues.edges.map(
+        ( obj: { node: { url: string, title: string, bodyText: string } } ) => (
+            <li key={obj.node.url}>
+                <dl>
+                    <a href={obj.node.url}>
+                        <dt>
+                            {obj.node.title}
+                        </dt>
+                        <dd>
+                            {obj.node.bodyText}
+                        </dd>
+                    </a>
+                </dl>
+            </li>
+        )
+    );
+
+    return (
+        <ol>
+            { mapIssues }
+        </ol>
+    );
 }
+
+export default Issues;

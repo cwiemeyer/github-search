@@ -2,6 +2,25 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+ You need to own a Github account and create a personal access token for developers to access the Github V4 GraphQL API.
+ On your account click 'Settings > Developer settings > Personal access tokens > Create new token'. 
+ As a permission the "Access public repositories" have to be set.
+ For information on how to do that, please see the Github documentation: 
+ https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
+ When you have done that, please create a file named '.env.local' within the main project folder after checkout 
+ on your local machine and add the following line:
+ `REACT_APP_GITHUB_API_TOKEN=your_token`
+
+ To run tests locally, copy the '.env.local' file and name it '.env.test.local'.
+
+ Make sure you do not push this file (it should be added to the .gitignore file already).
+
+ For more information on that, please see the Github guide for this:
+ https://docs.github.com/en/developers/apps/getting-started-with-apps/setting-up-your-development-environment-to-create-a-github-app
+
 ## Available Scripts
 
 In the project directory, you can run:
