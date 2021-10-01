@@ -42,7 +42,7 @@ function App() {
                       <Link to="/issues" component={Issues}>Browse Issues</Link>
                   </li>
                   <li>
-                      <Link to="/searchfield" component={SearchField}>Suche</Link>
+                      <Link to="/searchfield" component={SearchField}>Issue Search</Link>
                   </li>
               </ul>
           </BrowserRouter>

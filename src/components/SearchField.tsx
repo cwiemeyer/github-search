@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useState} from "react";
 import {
     useQuery,
     gql
@@ -16,14 +16,13 @@ import {
 
 // @TODO: adjust issues amount and states via input type checkbox or radio selection
 function SearchField() {
-        this.state = {
-            searchResults: [],
-            searchText: '',
-            gitHubIssueQuery: '',
-            repositoryOwner: "facebook",
-            repositoryName: "react",
-            searchClosedIssues: false,
-        };
+    // const [state, setState] = useState(initialState);
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [gitHubIssueQuery, setGitHubIssueQuery] = useState("");
+    const [repositoryOwner, setRepositoryOwner] = useState("facebook");
+    const [repositoryName, setRepositoryName] = useState("react");
+    const [searchClosedIssues, setSearchClosedIssues] = useState(false);
 
     // You can change the repository owner and name here to flexible browse and search another repository on Github!
     // const repositoryOwner: string = "facebook";
@@ -54,7 +53,7 @@ function SearchField() {
 
     // Execute search. React makes use of useQuery query hook of Apollo here to pass optional variables as an argument
     async function executeSearch() {
-        this.setState({ gitHubIssueQuery: this.state.searchText })
+        this.state.setGitHubIssueQuery({ gitHubIssueQuery: this.state.searchText })
         let gitHubIssueQuery: string,
             repositoryOwner: string,
             repositoryName : string;
@@ -77,7 +76,7 @@ function SearchField() {
 
         console.log('data: ', data);
 
-        this.setState({ searchResults: data })
+        this.state.setSearchResults({ searchResults: data })
 
         // @TODO: return the search results later here
         // return data;
@@ -95,7 +94,7 @@ function SearchField() {
                 <button
                     onClick={() => executeSearch()}
                 >
-                    OK
+                    Start search!
                 </button>
             </div>
         </div>
