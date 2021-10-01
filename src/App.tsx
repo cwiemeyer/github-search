@@ -7,6 +7,8 @@ import {
     ApolloProvider,
     HttpLink
 } from "@apollo/client";
+import {Link, BrowserRouter} from "react-router-dom";
+import SearchField from "./components/SearchField";
 
 // Setup of Apollo client to work with GraphQL Github API V4 (including the local caching strategy of Apollo)
 const cache = new InMemoryCache();
@@ -31,7 +33,19 @@ function App() {
       <ApolloProvider client={client}>
         <div className="App">
           <Header />
-            <Issues />
+          <BrowserRouter>
+              <ul>
+                  <li>
+                      <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                      <Link to="/issues" component={Issues}>Browse Issues</Link>
+                  </li>
+                  <li>
+                      <Link to="/searchfield" component={SearchField}>Suche</Link>
+                  </li>
+              </ul>
+          </BrowserRouter>
         </div>
       </ApolloProvider>
   );

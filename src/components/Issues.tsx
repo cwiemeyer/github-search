@@ -28,7 +28,13 @@ function Issues() {
     `;
 
     // React makes use of useQuery query hook of Apollo here to pass optional variables as an argument
-    const {loading, error, data} = useQuery(GITHUB_ISSUES,  {variables: { repositoryOwner, repositoryName }});
+    const {loading, error, data} = useQuery(
+        GITHUB_ISSUES,
+        {
+                variables: { repositoryOwner, repositoryName },
+                pollInterval: 1800000 // Refresh query every 30 minutes and cache them with Apollo
+                }
+        );
 
     // @TODO: add css spinner for loading state and error icon
     if (loading) return <p>Loading data...</p>;
