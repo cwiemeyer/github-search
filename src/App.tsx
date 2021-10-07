@@ -1,6 +1,6 @@
-import './scss/App.scss';
-import Header from "./components/Header";
-import Issues from "./components/Issues";
+import './App.scss';
+import Header from './components/Header';
+import Issues from './components/Issues';
 import {
     ApolloClient,
     InMemoryCache,
