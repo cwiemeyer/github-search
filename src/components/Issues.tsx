@@ -11,15 +11,16 @@ function Issues() {
     const repositoryName: string = "react"
 
     // The base query to fetch the issues from Github via Github V4 GraphQL API from a specific repository and owner.
+    // 100 is the limit set by Github V4 GraphAPI for a single field
     const GITHUB_ISSUES = gql`
         query GetGithubIssues($repositoryOwner: String!, $repositoryName: String!) {
           repository(owner: $repositoryOwner, name: $repositoryName) {
             issues(last:100, states:OPEN) {
               edges {
                 node {
+                  number
                   title
                   url
-                  bodyText
                 }
               }
             }
@@ -42,26 +43,19 @@ function Issues() {
 
     // The processed query data to be returned from the component.
     let mapIssues = data.repository.issues.edges.map(
-        ( obj: { node: { url: string, title: string, bodyText: string } } ) => (
+        ( obj: { node: { url: string, title: string, number: Number } } ) => (
             <li key={obj.node.url}>
-                <dl>
                     <a href={obj.node.url}>
-                        <dt>
-                            {obj.node.title}
-                        </dt>
-                        <dd>
-                            {obj.node.bodyText}
-                        </dd>
+                            {obj.node.number}: {obj.node.title}
                     </a>
-                </dl>
             </li>
         )
     );
 
     return (
-        <ol>
+        <ul>
             { mapIssues }
-        </ol>
+        </ul>
     );
 }
 

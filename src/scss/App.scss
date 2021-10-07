@@ -7,9 +7,15 @@
   align-items: center;
   justify-content: center;
   font-size: 1em;
-  color: white;
+  color: #fff;
 
   a {
     color: #61dafb;
+  }
+
+  ul {
+    li {
+      text-align: left;
+    }
   }
 }
